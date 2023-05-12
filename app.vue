@@ -31,8 +31,7 @@ const appConfig = useAppConfig()
 </script>
 
 <style>
-:root {
-  --coor: rgb(236, 119, 95);
-  --coor: rgb(59, 30, 121);
+.sdkf{
+  color: #3b1e79;
 }
 </style>

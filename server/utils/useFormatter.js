@@ -1,17 +1,14 @@
 export const postFormatter = async ( postData ) => {
-  const post = postData.graphql.shortcode_media
-  const photos = post.display_resources
+  const post = postData.items[0]
+  const mediaType = post.media_type
 
-  const preview = await base64Creator(post.display_url)
-
-  return {
-    id: post.id,
-    code: post.shortcode,
-    photos,
-    preview: `data:image/png;base64,` + preview,
-    caption: post.edge_media_to_caption.edges[0].node.text,
-    product_type: post.product_type
+  const handler = {
+    1 : singleImageHandler,
+    8 : carouselHandler,
   }
+
+  const res = await handler[mediaType](post)
+  return res
 }
 
 const base64Creator = async (url) => {
@@ -20,21 +17,30 @@ const base64Creator = async (url) => {
   return Buffer.from(buffer).toString('base64')
 }
 
+const singleImageHandler = async (post) => {
+  const photos = post.image_versions2.candidates
 
-export const postloginFormatter = async ( postData ) => {
-  const post = postData.items[0]
+  const preview = await base64Creator(photos[photos.length - 1].url)
 
-  const photos = await Promise.all(post.carousel_media.map(async media => {
-    const preview = media.image_versions2.candidates.find(img => img.width === media.original_width)
-    const base64 = await base64Creator(preview.url)
+  return {
+    id: post.id,
+    code: post.code,
+    photos,
+    preview: `data:image/png;base64,` + preview,
+    caption: post.caption.text,
+    mediaType: post.media_type
+  }
+}
 
+
+export const carouselHandler = async ( post ) => {
+  const photos = await Promise.all(
+    await post.carousel_media.map(async media => {
+      const preview = await base64Creator(media.image_versions2.candidates[0].url)
       return {
         id: media.id,
-        type: media.media_type,
         sources: media.image_versions2.candidates,
-        original_width: media.original_width,
-        original_height: media.original_height,
-        preview: `data:image/png;base64,` + base64
+        preview: `data:image/png;base64,` + preview,
       }
     })
   )
@@ -43,6 +49,6 @@ export const postloginFormatter = async ( postData ) => {
     code: post.code,
     photos,
     caption: post.caption.text,
-    product_type: post.product_type
+    mediaType: post.media_type
   }
 }

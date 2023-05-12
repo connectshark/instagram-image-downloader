@@ -7,12 +7,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt'
   ],
   runtimeConfig: {
-    APP_SECRET: import.meta.env.META_APP_CLIENT_SECRET,
-    public: {
-      APP_VERSION: import.meta.env.META_APP_VERSION,
-      APP_CLIENT_ID: import.meta.env.META_APP_CLIENT_ID,
-      APP_REDIRECT_URI: import.meta.env.REDIRECT_URI
-    }
+    COOKIE: import.meta.env.COOKIE
   },
   tailwindcss: {
     viewer: false

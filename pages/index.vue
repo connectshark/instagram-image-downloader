@@ -1,40 +1,38 @@
 <template>
   <NuxtLayout>
-    <h1 class=" leading-loose text-center text-5xl font-bold bg-clip-text from-[#063f66] to-[#0e8fe6] bg-gradient-to-br text-transparent">IG&nbsp;DOWNLOADER</h1>
-    <form @submit.prevent="getData(url)">
-      <p>
-        <label>
-          <input pattern="^https:\/\/www\.instagram\.com\/p\/.*" title="輸入ig貼文網址" v-model="url" required type="url" class=" w-full appearance-none p-4 rounded-xl border-none outline-none ring-1 ring-primary focus:ring-2" placeholder="https://www.instagram.com/p/CkQPf8qPmzq/">
-        </label>
-      </p>
-      <p class=" text-center py-5">
-        <button class=" bg-primary text-white p-3 rounded-lg" type="submit">送出</button>
-      </p>
-    </form>
-    <div v-if="data" class="bg-white p-4">
-      <div class="grid gap-4 lg:grid-cols-[300px_auto]">
-        <figure>
-          <img draggable="false" :src="data.preview" :alt="data.id">
-        </figure>
+    <section class="text-center lg:text-left py-20 w-11/12 mx-auto max-w-4xl">
+      <h1 class="text-5xl/tight font-bold bg-clip-text from-[#063f66] to-[#0e8fe6] bg-gradient-to-br text-transparent">IG DOWNLOADER</h1>
+      <p class="text-xl">最簡單Instagram圖片下載工具</p>
+      <div class="pt-20 space-x-10">
+        <a class="text-sm hover:underline" href="#steps">如何使用</a>
+        <NuxtLink class="bg-primary text-white inline-block p-3 text-sm rounded-full hover:bg-transparent hover:text-primary border border-primary transition-colors" to="/photo">馬上開始<i class='bx bxs-chevron-right'></i></NuxtLink>
+      </div>
+    </section>
+    <section class="text-center py-40 bg-[url('../../assets/svg/blob-scene-haikei.svg')] bg-cover bg-center">
+      <div class=" w-11/12 mx-auto max-w-4xl">
+
+        <h2 id="steps">簡單步驟下載Instagram影音</h2>
         <ul>
-          <li class=" mb-8 last:mb-0" v-for="img in data.photos" :key="img.src">
-            <a class=" bg-primary text-white p-1 rounded-lg hover:opacity-80" :href="img.src" target="_blank" rel="noopener noreferrer">{{img.config_width}}<i class='bx bx-x'></i>{{img.config_height}}下載<i class='bx bx-link-external'></i></a>
+          <li>
+            <div>
+              <h3>複製貼文連結</h3>
+            </div>
+            
+          </li>
+          <li>
+            <h3>貼進頁面輸入框中</h3>
+          </li>
+          <li>
+            <h3>點擊送出</h3>
+          </li>
+          <li>
+            <h3>選擇畫質並下載</h3>
           </li>
         </ul>
-        <div class=" p-4">
-          <p class="text-sm">{{ data.caption }}</p>
-        </div>
       </div>
-    </div>
+    </section>
   </NuxtLayout>
 </template>
 
 <script setup>
-const url = ref('')
-
-const {
-  getData,
-  loading,
-  data
-} = useAPI()
 </script>

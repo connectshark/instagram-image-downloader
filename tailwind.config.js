@@ -16,7 +16,8 @@ module.exports = {
       },
       colors: {
         'primary': 'rgb(59 30 121/ <alpha-value>)',
-        'cream': 'rgb(255 244 239 / <alpha-value>)'
+        'title': 'rgb(24 42 62/ <alpha-value>)',
+        'cream': 'rgb(255 253 253 / <alpha-value>)'
       }
     }
   },
