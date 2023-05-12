@@ -1,7 +1,7 @@
 <template>
 <div class="bg-cream font-nunito text-gray-900">
   <header>
-    <div class="w-11/12 mx-auto max-w-4xl py-6">
+    <div class="w-11/12 mx-auto max-w-6xl py-6">
       <h2 class=" text-2xl">
         <NuxtLink to="/">{{ appConfig.APP_NAME }}</NuxtLink>
       </h2>
@@ -32,6 +32,6 @@ const appConfig = useAppConfig()
 
 <style>
 .sdkf{
-  color: #3b1e79;
+  color: #27426b;
 }
 </style>

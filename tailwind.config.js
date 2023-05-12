@@ -15,8 +15,8 @@ module.exports = {
         'min-svh': 'calc(100svh - 80px - 104px)'
       },
       colors: {
-        'primary': 'rgb(59 30 121/ <alpha-value>)',
-        'title': 'rgb(24 42 62/ <alpha-value>)',
+        'primary': 'rgb(35 42 85/ <alpha-value>)',
+        'secondary': 'rgb(39 66 107/ <alpha-value>)',
         'cream': 'rgb(255 253 253 / <alpha-value>)'
       }
     }

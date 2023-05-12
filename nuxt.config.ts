@@ -22,5 +22,11 @@ export default defineNuxtConfig({
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&family=Ubuntu:wght@400;700&display=swap' }
       ],
     }
+  },
+  nitro: {
+    prerender: {
+      routes: ['/'],
+      crawlLinks: true
+    }
   }
 })
