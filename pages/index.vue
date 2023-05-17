@@ -2,7 +2,7 @@
   <NuxtLayout>
     <section class="text-center lg:text-left pt-20 pb-10 w-11/12 mx-auto max-w-6xl lg:grid lg:grid-cols-5">
       <div class=" col-start-1 col-span-3 row-start-1 self-center">
-        <h1 class=" text-5xl/tight lg:text-6xl/tight font-bold bg-clip-text from-[#063f66] to-[#0e8fe6] bg-gradient-to-br text-transparent">IG DOWNLOADER</h1>
+        <h1 class=" text-5xl/tight lg:text-6xl/tight font-bold">IG <span class=" bg-clip-text text-transparent to-primary from-accent bg-gradient-to-br">DOWNLOADER</span></h1>
         <p class="text-xl">最簡單Instagram圖片下載工具</p>
         <div class="pt-20 space-x-10">
           <a class="text-sm hover:underline" href="#steps">如何使用</a>
@@ -16,16 +16,16 @@
         <h2 id="steps" class="text-center text-2xl font-bold mb-20">專門Instagram圖片下載</h2>
         <ul>
           <li class="bg-[url('../../assets/svg/blob.svg')] bg-no-repeat bg-cover bg-center max-w-lg">
-            <h3 class=" text-2xl text-center leading-[20rem] text-white">公開Instagram帳戶圖片下載</h3>
+            <h3 class=" text-2xl text-center leading-[20rem]">公開帳戶圖片下載</h3>
           </li>
           <li class="bg-[url('../../assets/svg/blob-2.svg')] bg-no-repeat bg-cover bg-center max-w-lg ml-auto">
-            <h3 class=" text-2xl text-center leading-[20rem] text-white">私人Instagram圖片下載</h3>
+            <h3 class=" text-2xl text-center leading-[20rem]">私人圖片下載</h3>
           </li>
         </ul>
       </div>
     </section>
     <div class="bg-[url('../../assets/svg/wave.svg')] bg-no-repeat bg-cover bg-center py-20"></div>
-    <section class="py-20 bg-primary text-white">
+    <section class="py-20 bg-secondary">
       <div class="w-11/12 mx-auto max-w-6xl">
         <h2 id="steps" class="text-center text-2xl font-bold mb-20">簡單步驟下載Instagram影音</h2>
         <ul class="max-w-lg mx-auto">

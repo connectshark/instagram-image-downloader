@@ -1,4 +1,4 @@
-import { postFormatter } from '../utils/useFormatter'
+import { objFormatter } from '../utils/useFormatter'
 
 export default defineEventHandler(async (event) => {
   const { obj } = await readBody(event)
@@ -7,5 +7,5 @@ export default defineEventHandler(async (event) => {
   }
 
 
-  return await postFormatter(obj)
+  return await objFormatter(obj)
 })

@@ -15,9 +15,11 @@ module.exports = {
         'min-svh': 'calc(100svh - 80px - 104px)'
       },
       colors: {
-        'primary': 'rgb(35 42 85/ <alpha-value>)',
-        'secondary': 'rgb(39 66 107/ <alpha-value>)',
-        'cream': 'rgb(255 253 253 / <alpha-value>)'
+        background: '#f3f6fc',
+        text: '#070f1c',
+        primary: '#b22e5f',
+        secondary: '#ffffff',
+        accent: '#ce4846'
       }
     }
   },

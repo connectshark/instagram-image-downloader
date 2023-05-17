@@ -1,13 +1,25 @@
-export const postFormatter = async ( postData ) => {
-  const post = postData.items[0]
-  const mediaType = post.media_type
+export const objFormatter = async ( postObj ) => {
+  const post = postObj.items[0]
 
-  const handler = {
-    1 : singleImageHandler,
-    8 : carouselHandler,
+  const handlerObject = {
+    1: objSingleHandler,
+    8: objCarouselHandler
   }
 
-  const res = await handler[mediaType](post)
+  const res = await handlerObject[post.media_type](post)
+
+  return res
+}
+
+export const postFormatter = async ( postData ) => {
+  const post = postData.graphql.shortcode_media
+
+  const handlerObject = {
+    GraphSidecar: carouselHandler,
+    GraphImage: singleImageHandler
+  }
+
+  const res = await handlerObject[post.__typename](post)
   return res
 }
 
@@ -18,37 +30,77 @@ const base64Creator = async (url) => {
 }
 
 const singleImageHandler = async (post) => {
-  const photos = post.image_versions2.candidates
-
-  const preview = await base64Creator(photos[photos.length - 1].url)
+  const preview = await base64Creator(post.display_url)
 
   return {
     id: post.id,
-    code: post.code,
-    photos,
+    code: post.shortcode,
+    photos: post.display_resources,
     preview: `data:image/png;base64,` + preview,
-    caption: post.caption.text,
-    mediaType: post.media_type
+    caption: post.edge_media_to_caption.edges[0].node.text,
+    type: post.__typename
   }
 }
 
 
-export const carouselHandler = async ( post ) => {
+const carouselHandler = async ( post ) => {
   const photos = await Promise.all(
-    await post.carousel_media.map(async media => {
-      const preview = await base64Creator(media.image_versions2.candidates[0].url)
+    await post.edge_sidecar_to_children.edges.map(async media => {
+      const preview = await base64Creator(media.node.display_url)
       return {
-        id: media.id,
-        sources: media.image_versions2.candidates,
         preview: `data:image/png;base64,` + preview,
+        resources: media.node.display_resources,
+        id: media.node.id,
+        shortcode: media.node.shortcode
       }
     })
   )
+
+
+
+  return {
+    id: post.id,
+    code: post.shortcode,
+    photos,
+    caption: post.edge_media_to_caption.edges[0].node.text,
+    type: post.__typename
+  }
+}
+
+const objSingleHandler = async ( post ) => {
+  const length = post.image_versions2.candidates.length
+  const preview = await base64Creator(post.image_versions2.candidates[length - 1].url)
+
+
+  return {
+    id: post.id,
+    code: post.code,
+    preview: `data:image/png;base64,` + preview,
+    photos: post.image_versions2.candidates,
+    caption: post.caption.text,
+    type: post.media_type
+  }
+}
+
+const objCarouselHandler = async ( post ) => {
+  const photos = await Promise.all(
+    await post.carousel_media.map(async media => {
+      const length = media.image_versions2.candidates.length
+      const preview = await base64Creator(media.image_versions2.candidates[length - 1].url)
+
+      return {
+        preview: `data:image/png;base64,` + preview,
+        resources: media.image_versions2.candidates,
+        id: media.id
+      }
+    })
+  )
+
   return {
     id: post.id,
     code: post.code,
     photos,
     caption: post.caption.text,
-    mediaType: post.media_type
+    type: post.media_type
   }
 }

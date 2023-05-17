@@ -1,9 +1,9 @@
 <template>
-<div class="bg-cream font-nunito text-gray-900">
+<div class=" bg-background font-nunito text-text">
   <header>
-    <div class="w-11/12 mx-auto max-w-6xl py-6">
-      <h2 class=" text-2xl">
-        <NuxtLink to="/">{{ appConfig.APP_NAME }}</NuxtLink>
+    <div class="w-11/12 mx-auto max-w-6xl py-10">
+      <h2>
+        <NuxtLink class="text-3xl font-bold" to="/">{{ appConfig.APP_NAME }}</NuxtLink>
       </h2>
       <nav>
         <ul>

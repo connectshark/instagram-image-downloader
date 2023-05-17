@@ -1,7 +1,7 @@
 <template>
 <NuxtLayout>
   <div class="w-11/12 mx-auto max-w-4xl">
-    <h1 class=" leading-loose text-center text-5xl font-bold bg-clip-text from-[#063f66] to-[#0e8fe6] bg-gradient-to-br text-transparent">IG&nbsp;DOWNLOADER</h1>
+    <h1 class=" leading-loose text-center text-5xl font-bold bg-clip-text to-primary from-accent bg-gradient-to-br text-transparent">IG&nbsp;DOWNLOADER</h1>
     <form @submit.prevent="getData(url)">
       <p>
         <label>
@@ -16,7 +16,7 @@
       <i class='bx bx-loader bx-spin bx-sm' ></i>
     </div>
     <div v-if="data" class="bg-white p-4">
-      <div v-if="data.mediaType === 1">
+      <div v-if="data.type === 'GraphImage'">
         <h3>貼文預覽</h3>
         <div class="p-4">
           <p class="text-sm">{{ data.caption }}</p>
@@ -26,12 +26,12 @@
           <img class=" mx-auto" draggable="false" :src="data.preview" :alt="data.id">
         </figure>
         <ul class=" flex flex-wrap gap-4">
-          <li class="" v-for="img in data.photos" :key="img.src">
-            <a class=" text-primary underline rounded-lg hover:opacity-80" :href="img.url" target="_blank" rel="noopener noreferrer">{{img.width}}x{{img.height}}下載<i class='bx bx-link-external'></i></a>
+          <li v-for="img in data.photos" :key="img.src">
+            <a class="text-primary underline rounded-lg hover:opacity-80" :href="img.src" target="_blank" rel="noopener noreferrer">{{img.config_width}}x{{img.config_height}}下載<i class='bx bx-link-external'></i></a>
           </li>
         </ul>
       </div>
-      <div v-if="data.mediaType === 8">
+      <div v-if="data.type === 'GraphSidecar'">
         <h3>貼文預覽</h3>
         <div class="p-4">
           <p class="text-sm">{{ data.caption }}</p>
@@ -45,8 +45,8 @@
               </figure>
             </div>
             <ul class=" flex flex-wrap gap-4">
-              <li class="" v-for="source in img.sources" :key="source.url">
-                <a class=" text-primary underline rounded-lg hover:opacity-80" :href="source.url" target="_blank" rel="noopener noreferrer">{{source.width}}x{{source.height}}下載<i class='bx bx-link-external'></i></a>
+              <li class="" v-for="source in img.resources" :key="source.src">
+                <a class=" text-primary underline rounded-lg hover:opacity-80" :href="source.src" target="_blank" rel="noopener noreferrer">{{ source.config_width }}x{{ source.config_height }}下載<i class='bx bx-link-external'></i></a>
               </li>
             </ul>
           </li>
